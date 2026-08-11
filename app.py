@@ -4,7 +4,7 @@ import streamlit as st
 import pickle
 import requests
 
-API_KEY = "0d59ce3a21a7178b9a953a8401825081"
+API_KEY = st.secrets["TMDB_API_KEY"]
 
 def fetch_movie_details(movie_id):
     response = requests.get(f"https://api.themoviedb.org/3/movie/{movie_id}?api_key={API_KEY}&language=en-US")
@@ -38,6 +38,7 @@ movies = pickle.load(open('movies.pkl', 'rb'))
 movies_list = movies['title'].values
 
 similarity = pickle.load(open('similarity.pkl', 'rb'))
+# similarity = pickle.load(open('similarity_small.pkl', 'rb'))
 
 st.set_page_config(page_title="Movie Recommender", page_icon="🎬", layout="wide")
 st.title('🎬 Movie Recommender System')
